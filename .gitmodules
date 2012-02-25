@@ -1,0 +1,6 @@
+[submodule "nixpkgs"]
+	path = nixpkgs
+	url = /home/bnordgren/nixos/mirrors/nixpkgs
+[submodule "nixos"]
+	path = nixos
+	url = /home/bnordgren/nixos/mirrors/nixos
