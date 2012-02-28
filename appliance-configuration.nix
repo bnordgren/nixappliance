@@ -18,4 +18,23 @@
 
   # Add the NixOS Manual on virtual console 8
   services.nixosManual.showManual = false;
+
+  # Add the FTP server.
+  services.vsftpd = {
+    enable = true ; 
+    anonymousUser = true ; 
+    anonymousUserHome = "/var/ftp" ; 
+    anonymousMkdirEnable = false ; 
+    localUsers = false ;
+
+    # enable uploads
+    anonymousUploadEnable = true ; 
+    writeEnable = true ;
+
+    # turn off ability to list directories
+    additionalConfig = ''
+      dirlist_enable=NO
+    '' ;
+
+  } ;
 }
