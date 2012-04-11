@@ -6,7 +6,7 @@
   # customize the choice of packages for this appliance
   nixpkgs.config = {
     packageOverrides = orig : {
-      postgresql = pkgs.postgresql90;
+      postgresql = pkgs.postgresql91;
     };
   };
 
@@ -30,6 +30,6 @@
      host  all all 127.0.0.1/32 md5
      host  all all 0.0.0.0/0    md5
     ''; 
-    extraPlugins = [ pkgs.postgis.v_2_0_0b2 ] ;
+    extraPlugins = [ pkgs.postgis.v_2_0_0 ] ;
   } ; 
 }
