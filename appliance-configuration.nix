@@ -1,7 +1,7 @@
 { config, pkgs, ...  } : 
 {
   # specify the kernel
-  boot.kernelPackages = pkgs.linuxPackages_3_2 ; 
+  boot.kernelPackages = pkgs.linuxPackages_2_6_39 ; 
 
   # customize the choice of packages for this appliance
   #nixpkgs.config = {
