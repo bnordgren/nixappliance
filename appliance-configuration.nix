@@ -18,4 +18,10 @@
 
   # Add the NixOS Manual on virtual console 8
   services.nixosManual.showManual = false;
+
+  # Add an NFS export to the rxdata front end.
+  services.nfs.server = { 
+    enable = true ; 
+    exports = ''/mnt/rxcadre 192.168.56.2(rw,all_squash,no_subtree_check)'' ; 
+  } ; 
 }
