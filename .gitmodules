@@ -1,0 +1,6 @@
+[submodule "nixos"]
+	path = nixos
+	url = git@github.com:bnordgren/nixos-1.git
+[submodule "nixpkgs"]
+	path = nixpkgs
+	url = git@github.com:bnordgren/nixpkgs-1.git
