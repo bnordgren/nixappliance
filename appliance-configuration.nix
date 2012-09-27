@@ -43,6 +43,14 @@
       stateDir = "/var/run/httpd" ; 
       logDir   = "/var/log/httpd" ; 
     }
+    { serviceType = "rxdrupal" ; 
+      publicUploadDir = "/mnt/rxcadre/drupal/public" ; 
+      privateUploadDir = "/mnt/rxcadre/drupal/private" ; 
+      urlPrefix = "/working";   
+      dbuser = "drupal" ;
+      dbname = "rxdata" ;
+      dbpassword = "dr00pa!";
+    }
   ] ;
 
   services.mysql.enable = true ;
