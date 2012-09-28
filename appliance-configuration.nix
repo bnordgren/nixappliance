@@ -50,6 +50,9 @@
       dbuser = "drupal" ;
       dbname = "rxdata" ;
       dbpassword = "dr00pa!";
+      maxFileUploads = "20" ; 
+      maxUploadSize = "256M";
+      postMaxSize = "1024M" ;
     }
   ] ;
 
