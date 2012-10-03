@@ -24,4 +24,29 @@
     enable = true ; 
     exports = ''/mnt/rxcadre 192.168.56.2(rw,all_squash,no_subtree_check)'' ; 
   } ; 
+
+  # Set up LDAP users
+  users.ldap =  { 
+    enable = true ; 
+    daemon.enable = true ; 
+    server = "ldap://localhost/";
+    base = "ou=_FOREST_SERVICE,dc=ds,dc=fs,dc=fed,dc=us";
+    bind =  {
+      distinguishedName = "cn=bnordgren,ou=RMRS,ou=RESEARCH,ou=ENDUSERS,ou=_FOREST_SERVICE,dc=ds,dc=fs,dc=fed,dc=us";
+      password = "/etc/ldap/bind.password" ;
+    } ; 
+    useTLS = true ;
+
+    daemon.extraConfig = ''
+      filter passwd (|(objectClass=User)(objectClass=inetOrgUser))
+      map passwd uid cn
+      map passwd homeDirectory "''${homeDirectory:-/mnt/store}"
+      map passwd loginShell "''${loginShell:-/bin/sh}"
+      map passwd gidNumber  "''${gidNumber:-65534}"
+      map passwd homeDirectory "/mnt/store"
+      map passwd gidNumber     "65534"
+      map passwd loginShell    "/bin/sh"
+    '';
+
+  } ;
 }
