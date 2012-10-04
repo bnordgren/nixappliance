@@ -38,6 +38,7 @@
     useTLS = true ;
 
     daemon.extraConfig = ''
+      idle_timelimit 300
       filter passwd (objectClass=person)
       map passwd uid cn
       map passwd homeDirectory "''${homeDirectory:-/mnt/store}"
@@ -52,7 +53,7 @@
 
   programs.rssh = {
     available = true ; 
-    enableRsync = false ;
+    #enableRsync = false ;
   };
 
 }
