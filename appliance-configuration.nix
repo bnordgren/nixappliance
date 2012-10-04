@@ -38,15 +38,21 @@
     useTLS = true ;
 
     daemon.extraConfig = ''
-      filter passwd (|(objectClass=User)(objectClass=inetOrgUser))
+      filter passwd (objectClass=person)
       map passwd uid cn
       map passwd homeDirectory "''${homeDirectory:-/mnt/store}"
       map passwd loginShell "''${loginShell:-/bin/sh}"
       map passwd gidNumber  "''${gidNumber:-65534}"
       map passwd homeDirectory "/mnt/store"
       map passwd gidNumber     "65534"
-      map passwd loginShell    "/bin/sh"
+      map passwd loginShell    "/run/current-system/sw/bin/rssh"
     '';
 
   } ;
+
+  programs.rssh = {
+    available = true ; 
+    enableRsync = false ;
+  };
+
 }
