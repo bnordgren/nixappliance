@@ -14,7 +14,10 @@
   #
 
   # Add an OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    gatewayPorts = "yes" ; 
+  };
 
   # Add the NixOS Manual on virtual console 8
   services.nixosManual.showManual = false;
@@ -54,6 +57,7 @@
   programs.rssh = {
     available = true ; 
     #enableRsync = false ;
+    umask = "007";
   };
 
 }
