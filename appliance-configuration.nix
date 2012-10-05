@@ -4,10 +4,13 @@
   boot.kernelPackages = pkgs.linuxPackages_3_2 ; 
 
   # customize the choice of packages for this appliance
-  #nixpkgs.config = {
-  #  packageOverrides = orig : {
-  #  };
-  #};
+#  nixpkgs.config = {
+#    packageOverrides = orig : {
+#      openssh = (orig.openssh.override {
+#        hpnSupport = true ;
+#      });
+#    };
+#  };
 
   #
   # List services that you want to enable:
