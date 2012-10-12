@@ -4,12 +4,17 @@
   # specify the kernel
   boot.kernelPackages = pkgs.linuxPackages_3_2 ; 
 
+  environment.systemPackages =  [ 
+    pkgs.openssl 
+    pkgs.vim
+  ];
+
   # time
   time.timeZone = "America/Denver" ; 
   services.ntp.enable = true ; 
 
   # List services that you want to enable:
-  services.geonetwork.enable = true ; 
+  services.geonetwork.enable = false ; 
   services.geonetwork.extent = "-130,23,-65,50" ; 
   services.geonetwork.databaseConfig = ''
                 <resource enabled="true">
@@ -60,6 +65,11 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  security.sudo = { 
+    enable = true ; 
+    wheelNeedsPassword = false ; 
+  } ;
 
   # Mount the NFS share
   fileSystems = [ 
