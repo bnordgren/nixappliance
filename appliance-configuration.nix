@@ -59,6 +59,17 @@
       maxUploadSize = "256M";
       postMaxSize = "1024M" ;
     }
+    { serviceType = "rxdrupal" ; 
+      publicUploadDir = "/mnt/rxcadre/drupal-sandbox/public" ; 
+      privateUploadDir = "/mnt/rxcadre/drupal-sandbox/private" ; 
+      urlPrefix = "/working-sandbox";   
+      dbuser = "drupal" ;
+      dbname = "rxdata_sandbox" ;
+      dbpassword = "dr00pa!";
+      maxFileUploads = "20" ; 
+      maxUploadSize = "256M";
+      postMaxSize = "1024M" ;
+    }
   ] ;
 
   services.mysql.enable = true ;
