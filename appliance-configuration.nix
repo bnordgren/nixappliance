@@ -32,7 +32,7 @@
 '' ;
   services.geonetwork.baseDir = "/mnt/rxcadre/geonetwork" ; 
   services.geonetwork.geoserverUrl = "https://rxdata.usfs-i2.umt.edu/geoserver/wms" ; 
-  services.geoserver.enable  = true ; 
+  services.geoserver.enable  = false ; 
   services.geoserver.pyramids = true ; 
   services.tomcat.javaOpts = "-Xms256m -Xmx1256m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512m -XX:CompileCommand=exclude,net/sf/saxon/event/ReceivingContentHandler.startElement" ;
   services.tomcat.sharedLibs = [ "${pkgs.xercesJava}/lib/java/xercesImpl.jar"
@@ -43,6 +43,7 @@
   services.httpd.sslServerCert = "/var/ssl/server.crt" ; 
   services.httpd.sslServerKey  = "/var/ssl/server.key" ; 
   services.httpd.adminAddr = "bnordgren@fs.fed.us" ; 
+  services.httpd.documentRoot = "/var/httpd"; 
   services.httpd.extraSubservices =  [
     { serviceType = "tomcat-connector" ; 
       stateDir = "/var/run/httpd" ; 
@@ -51,6 +52,7 @@
     { serviceType = "rxdrupal" ; 
       publicUploadDir = "/mnt/rxcadre/drupal/public" ; 
       privateUploadDir = "/mnt/rxcadre/drupal/private" ; 
+      tmpUploadDir = "/mnt/rxcadre/drupal/tmp" ; 
       urlPrefix = "/working";   
       dbuser = "drupal" ;
       dbname = "rxdata" ;
@@ -62,6 +64,7 @@
     { serviceType = "rxdrupal" ; 
       publicUploadDir = "/mnt/rxcadre/drupal-sandbox/public" ; 
       privateUploadDir = "/mnt/rxcadre/drupal-sandbox/private" ; 
+      tmpUploadDir = "/mnt/rxcadre/drupal-sandbox/tmp" ; 
       urlPrefix = "/working-sandbox";   
       dbuser = "drupal" ;
       dbname = "rxdata_sandbox" ;
