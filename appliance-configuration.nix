@@ -38,43 +38,59 @@
   services.tomcat.sharedLibs = [ "${pkgs.xercesJava}/lib/java/xercesImpl.jar"
   "${pkgs.mysql_jdbc}/share/java/mysql-connector-java.jar" ] ; 
 
-  services.httpd.enable = true ; 
-  services.httpd.hostName = "rxdata.usfs-i2.umt.edu" ; 
-  services.httpd.enableSSL = true;  
-  services.httpd.sslServerCert = "/var/ssl/server.crt" ; 
-  services.httpd.sslServerKey  = "/var/ssl/server.key" ; 
-  services.httpd.adminAddr = "bnordgren@fs.fed.us" ; 
-  services.httpd.documentRoot = "/var/httpd"; 
-  services.httpd.extraSubservices =  [
-    { serviceType = "tomcat-connector" ; 
-      stateDir = "/var/run/httpd" ; 
-      logDir   = "/var/log/httpd" ; 
-    }
-    { serviceType = "rxdrupal" ; 
-      publicUploadDir = "/mnt/rxcadre/drupal/public" ; 
-      privateUploadDir = "/mnt/rxcadre/drupal/private" ; 
-      tmpUploadDir = "/mnt/rxcadre/drupal/tmp" ; 
-      urlPrefix = "/working";   
-      dbuser = "drupal" ;
-      dbname = "rxdata" ;
-      dbpassword = "dr00pa!";
-      maxFileUploads = "20" ; 
-      maxUploadSize = "256M";
-      postMaxSize = "1024M" ;
-    }
-    { serviceType = "rxdrupal" ; 
-      publicUploadDir = "/mnt/rxcadre/drupal-sandbox/public" ; 
-      privateUploadDir = "/mnt/rxcadre/drupal-sandbox/private" ; 
-      tmpUploadDir = "/mnt/rxcadre/drupal-sandbox/tmp" ; 
-      urlPrefix = "/working-sandbox";   
-      dbuser = "drupal" ;
-      dbname = "rxdata_sandbox" ;
-      dbpassword = "dr00pa!";
-      maxFileUploads = "20" ; 
-      maxUploadSize = "256M";
-      postMaxSize = "1024M" ;
-    }
-  ] ;
+  services.httpd = {
+    enable = true ; 
+    hostName = config.networking.hostName ; 
+    adminAddr = "bnordgren@fs.fed.us" ; 
+    documentRoot = "/var/httpd"; 
+
+    virtualHosts = [
+      { hostName = config.networking.hostName ;
+        extraConfig = ''
+          Redirect / https://${config.networking.hostName}/
+        '';
+
+      } 
+      { hostName = config.networking.hostName ;
+        enableSSL = true;  
+        sslServerCert = "/var/ssl/server.crt" ; 
+        sslServerKey  = "/var/ssl/server.key" ; 
+      }
+    ];
+
+    extraSubservices =  [
+      { serviceType = "tomcat-connector" ; 
+        stateDir = "/var/run/httpd" ; 
+        logDir   = "/var/log/httpd" ; 
+      }
+      { serviceType = "rxdrupal" ; 
+        publicUploadDir = "/mnt/rxcadre/drupal/public" ; 
+        privateUploadDir = "/mnt/rxcadre/drupal/private" ; 
+        tmpUploadDir = "/mnt/rxcadre/drupal/tmp" ; 
+        urlPrefix = "/working";   
+        dbuser = "drupal" ;
+        dbname = "rxdata" ;
+        dbpassword = "dr00pa!";
+        maxFileUploads = "20" ; 
+        maxUploadSize = "256M";
+        postMaxSize = "1024M" ;
+      }
+      { serviceType = "rxdrupal" ; 
+        publicUploadDir = "/mnt/rxcadre/drupal-sandbox/public" ; 
+        privateUploadDir = "/mnt/rxcadre/drupal-sandbox/private" ; 
+        tmpUploadDir = "/mnt/rxcadre/drupal-sandbox/tmp" ; 
+        urlPrefix = "/working-sandbox";   
+        dbuser = "drupal" ;
+        dbname = "rxdata_sandbox" ;
+        dbpassword = "dr00pa!";
+        maxFileUploads = "20" ; 
+        maxUploadSize = "256M";
+        postMaxSize = "1024M" ;
+      }
+    ] ;
+  };
+
+  
 
   # using logrotate to make backups and keep them for a week
   services.logrotate = { 
