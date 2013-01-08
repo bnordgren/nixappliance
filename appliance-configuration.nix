@@ -28,7 +28,8 @@
   # Add an NFS export to the rxdata front end.
   services.nfs.server = { 
     enable = true ; 
-    exports = ''/mnt/rxcadre 192.168.56.2(rw,all_squash,no_subtree_check)'' ; 
+    exports = ''/mnt/rxcadre 192.168.56.2(rw,all_squash,no_subtree_check) fireterm(rw,all_squash,no_subtree_check)
+/mnt/rxcadre/fcburn fcburn.usfs-i2.umt.edu(rw,all_squash,no_subtree_check)'' ; 
   } ; 
 
   # Set up LDAP users
@@ -62,5 +63,7 @@
     #enableRsync = false ;
     umask = "007";
   };
+
+  programs.gridftp_lite.available = false; 
 
 }
