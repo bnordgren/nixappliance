@@ -26,7 +26,7 @@
                 </resource>
 '' ;
   services.geonetwork.baseDir = "/mnt/rxcadre/geonetwork" ; 
-  services.geonetwork.geoserverUrl = "https://rxdata.usfs-i2.umt.edu/geoserver/wms" ; 
+  services.geonetwork.geoserverUrl = "https://geonetwork.usfs-i2.umt.edu/geoserver/wms" ; 
   services.geoserver.enable  = true ; 
   services.geoserver.pyramids = true ; 
   services.tomcat.javaOpts = "-Xms256m -Xmx1256m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512m -XX:CompileCommand=exclude,net/sf/saxon/event/ReceivingContentHandler.startElement" ;
