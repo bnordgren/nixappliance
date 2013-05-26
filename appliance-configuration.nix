@@ -11,6 +11,7 @@
   # List services that you want to enable:
   services.geonetwork.enable = true ; 
   services.geonetwork.extent = "-130,23,-65,50" ; 
+  services.geonetwork.uploadMax = 250 ; 
   services.geonetwork.databaseConfig = ''
                 <resource enabled="true">
                         <name>main-db</name>
@@ -30,6 +31,7 @@
   services.geoserver.enable  = true ; 
   services.geoserver.pyramids = true ; 
   services.tomcat.javaOpts = "-Xms256m -Xmx1256m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512m -XX:CompileCommand=exclude,net/sf/saxon/event/ReceivingContentHandler.startElement" ;
+  services.tomcat.catalinaOpts = "-Djava.util.prefs.systemRoot=${config.services.tomcat.baseDir}/conf/.systemPrefs -Djava.util.prefs.userRoot=${config.services.tomcat.baseDir}/conf/.userPrefs" ; 
   services.tomcat.sharedLibs = [ "${pkgs.xercesJava}/lib/java/xercesImpl.jar"
   "${pkgs.mysql_jdbc}/share/java/mysql-connector-java.jar" ] ; 
 
@@ -47,8 +49,11 @@
 
   services.mysql.enable = true ;
 
+  security.sudo.wheelNeedsPassword = false; 
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.permitRootLogin = "yes";
 
   # Mount the NFS share
   fileSystems = [ 
